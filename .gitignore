@@ -1,3 +1,4 @@
+# Documentation
 /docs/
 
 # MSBuild / xbuild products
@@ -13,6 +14,9 @@ obj/
 
 # Xamarin Studio / MonoDevelop
 *.userprefs
+
+# NuGet
+packages
 
 */gtk-gui/*.cs
 */*/gtk-gui/*.cs
