@@ -1,8 +1,21 @@
 /docs/
+
+# MSBuild / xbuild products
 bin/
+obj/
+
+# Visual Studio
+*.suo
+*proj.user
+
+# ReSharper
+*.DotSettings.user
+
+# Xamarin Studio / MonoDevelop
+*.userprefs
+
 */gtk-gui/*.cs
 */*/gtk-gui/*.cs
 *.pidb
-zbar-sharp.userprefs
 test-results/
 tests/test-results/
