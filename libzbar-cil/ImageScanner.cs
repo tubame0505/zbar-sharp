@@ -165,13 +165,13 @@ namespace ZBar
 		/// <summary>
 		/// Constructor
 		/// </summary>
-		[DllImport("libzbar")]
+		[DllImport("libzbar-0")]
 		private static extern IntPtr zbar_image_scanner_create();
 		
 		/// <summary>
 		/// Destructor.
 		/// </summary>
-		[DllImport("libzbar")]
+		[DllImport("libzbar-0")]
 		private static extern void zbar_image_scanner_destroy(IntPtr scanner);
 		
 		/// <summary>
@@ -186,7 +186,7 @@ namespace ZBar
 		/// pass a NULL value to disable callbacks.
 		/// </summary>
         /// <returns>the previously registered handler</returns>
-		[DllImport("libzbar")]
+		[DllImport("libzbar-0")]
 		private static extern zbar_image_data_handler zbar_image_scanner_set_data_handler(IntPtr scanner, zbar_image_data_handler handler, IntPtr userdata);
 		
 		
@@ -196,7 +196,7 @@ namespace ZBar
 		/// <returns>0 for success, non-0 for failure (config does not apply to
 		/// specified symbology, or value out of range)
         /// </returns>
-		[DllImport("libzbar")]
+		[DllImport("libzbar-0")]
 		private static extern int zbar_image_scanner_set_config(IntPtr scanner, int symbology, int config, int val);
 		
 		/// <summary>
@@ -206,7 +206,7 @@ namespace ZBar
 		/// consistency checking and hysteresis to the results.
 		/// this interface also clears the cache
 		/// </summary>
-		[DllImport("libzbar")]
+		[DllImport("libzbar-0")]
 		private static extern void zbar_image_scanner_enable_cache(IntPtr scanner, int enable);
 		
 		/// <summary>
@@ -217,7 +217,7 @@ namespace ZBar
         ///  > 0 if symbols were successfully decoded from the image,
 		/// 0 if no symbols were found or -1 if an error occurs
 		/// </returns>
-		[DllImport("libzbar")]
+		[DllImport("libzbar-0")]
 		private static extern int zbar_scan_image(IntPtr scanner, IntPtr image);
 		#endregion
 	}
