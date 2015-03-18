@@ -1,0 +1,18 @@
+<?xml version="1.0"?>
+<package >
+  <metadata>
+    <id>$id$</id>
+    <version>0.10.0.1</version>
+    <title>$title$</title>
+    <authors>Jonas Finnemann Jensen, Patrick McEvoy, Brandon McCaig, Jesper Stemann Andersen</authors>
+    <owners>stemann</owners>
+    <licenseUrl>http://www.gnu.org/licenses/old-licenses/lgpl-2.1.html</licenseUrl>
+    <projectUrl>https://github.com/ihpostal/zbar-sharp</projectUrl>
+    <iconUrl>http://zbar.sourceforge.net/img/zbar.200.png</iconUrl>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <description>$description$</description>
+    <releaseNotes></releaseNotes>
+    <copyright>Copyright 2010-2015</copyright>
+    <tags>ZBar Barcode</tags>
+  </metadata>
+</package>
