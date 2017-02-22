@@ -23,6 +23,8 @@
 
 using System;
 using System.Runtime.InteropServices;
+using System.Collections.Generic;
+using System.Drawing;
 
 namespace ZBar
 {
@@ -51,12 +53,28 @@ namespace ZBar
 			this.type = (SymbolType)zbar_symbol_get_type(symbol);
 			this.quality = zbar_symbol_get_quality(symbol);
 			this.count = zbar_symbol_get_count(symbol);
-		}
+
+            //Get location data
+            locs = new List<Point>();
+            if (zbar_symbol_get_loc_size(symbol) > 0)
+            {
+                for (uint i = 0; i < zbar_symbol_get_loc_size(symbol); i++)
+                {
+                    Point loc = new Point(
+                        zbar_symbol_get_loc_x(symbol, i),
+                        zbar_symbol_get_loc_y(symbol, i)
+                        );
+                    locs.Add(loc);
+                }
+            }
+
+        }
 		
 		private string data;
 		private int quality;
 		private int count;
 		private SymbolType type;
+        private List<Point> locs;
 
 		public override string ToString(){
 			return this.type.ToString() + " " + this.data;
@@ -108,23 +126,33 @@ namespace ZBar
 				return this.type;
 			}
 		}
-		
-		#endregion
-		
-		#region Extern C functions
-		/// <summary>
-		/// symbol reference count manipulation.
-		/// </summary>
+
+        /// <value>
+        /// Get location of symbol.
+        /// </value>
+        public List<Point> Locs
+        {
+            get
+            {
+                return this.locs;
+            }
+        }
+        #endregion
+
+        #region Extern C functions
+        /// <summary>
+        /// symbol reference count manipulation.
+        /// </summary>
         /// <remarks>
-		/// increment the reference count when you store a new reference to the
-		/// symbol.  decrement when the reference is no longer used.  do not
-		/// refer to the symbol once the count is decremented and the
-		/// containing image has been recycled or destroyed.
-		/// the containing image holds a reference to the symbol, so you
-		/// only need to use this if you keep a symbol after the image has been
-		/// destroyed or reused.
-		/// </remarks>
-		[DllImport("libzbar-0")]
+        /// increment the reference count when you store a new reference to the
+        /// symbol.  decrement when the reference is no longer used.  do not
+        /// refer to the symbol once the count is decremented and the
+        /// containing image has been recycled or destroyed.
+        /// the containing image holds a reference to the symbol, so you
+        /// only need to use this if you keep a symbol after the image has been
+        /// destroyed or reused.
+        /// </remarks>
+        [DllImport("libzbar-0")]
 		private static extern void zbar_symbol_ref(IntPtr symbol, int refs);
 		
 		/// <summary>
