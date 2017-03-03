@@ -68,10 +68,10 @@ namespace ZBar
 			}
 		}
 		
-		[DllImport("libzbar-0")]
+		[DllImport("libzbar-0", CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr _zbar_error_string(IntPtr obj, int verbosity);
 		
-		[DllImport("libzbar-0")]
+		[DllImport("libzbar-0", CallingConvention = CallingConvention.Cdecl)]
 		private static extern int _zbar_get_error_code(IntPtr obj);
 	}
 	

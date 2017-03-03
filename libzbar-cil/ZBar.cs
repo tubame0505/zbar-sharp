@@ -51,8 +51,8 @@ namespace ZBar
 		#region Extern C Functions.
 
 		private static class NativeMethods{
-			[DllImport("libzbar-0")]
-			public static unsafe extern int zbar_version(uint* major, uint* minor);
+            [DllImport("libzbar-0", CallingConvention = CallingConvention.Cdecl)]
+            public static unsafe extern int zbar_version(uint* major, uint* minor);
 		}
 
 		#endregion

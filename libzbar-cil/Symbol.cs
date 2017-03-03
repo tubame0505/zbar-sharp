@@ -47,7 +47,9 @@ namespace ZBar
 			//Get data from the symbol
 			IntPtr pData = zbar_symbol_get_data(symbol);
 			int length = (int)zbar_symbol_get_data_length(symbol);
-			this.data = Marshal.PtrToStringAnsi(pData, length);
+            byte[] BData = new byte[length];
+            Marshal.Copy(pData, BData, 0, length);
+            this.data = System.Text.Encoding.UTF8.GetString(BData);
 			
 			//Get the other fields
 			this.type = (SymbolType)zbar_symbol_get_type(symbol);
@@ -152,28 +154,28 @@ namespace ZBar
         /// only need to use this if you keep a symbol after the image has been
         /// destroyed or reused.
         /// </remarks>
-        [DllImport("libzbar-0")]
+        [DllImport("libzbar-0", CallingConvention = CallingConvention.Cdecl)]
 		private static extern void zbar_symbol_ref(IntPtr symbol, int refs);
 		
 		/// <summary>
 		/// retrieve type of decoded symbol.
 		/// </summary>
 		/// <returns> the symbol type</returns>
-		[DllImport("libzbar-0")]
+		[DllImport("libzbar-0", CallingConvention = CallingConvention.Cdecl)]
 		private static extern int zbar_symbol_get_type(IntPtr symbol);
 		
 		/// <summary>
 		/// retrieve data decoded from symbol.
 		/// </summary>
 		/// <returns> the data string</returns>
-		[DllImport("libzbar-0")]
+		[DllImport("libzbar-0", CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr zbar_symbol_get_data(IntPtr symbol);
 		
 		/// <summary>
 		/// retrieve length of binary data.
 		/// </summary>
 		/// <returns> the length of the decoded data</returns>
-		[DllImport("libzbar-0")]
+		[DllImport("libzbar-0", CallingConvention = CallingConvention.Cdecl)]
 		private static extern uint zbar_symbol_get_data_length(IntPtr symbol);
 		
 		/// <summary>
@@ -187,7 +189,7 @@ namespace ZBar
 		/// metric is refined.  currently, only the ordered relationship
 		/// between two values is defined and will remain stable in the future
         /// </remarks>
-		[DllImport("libzbar-0")]
+		[DllImport("libzbar-0", CallingConvention = CallingConvention.Cdecl)]
 		private static extern int zbar_symbol_get_quality(IntPtr symbol);
 		
 		/// <summary>
@@ -202,7 +204,7 @@ namespace ZBar
 		/// 0 if symbol is newly verified.
 		/// > 0 for duplicate symbols
         /// </returns>
-		[DllImport("libzbar-0")]
+		[DllImport("libzbar-0", CallingConvention = CallingConvention.Cdecl)]
 		private static extern int zbar_symbol_get_count(IntPtr symbol);
 		
 		/// <summary>
@@ -213,7 +215,7 @@ namespace ZBar
 		/// <returns> the number of points in the location polygon</returns>
 		/// <remarks>this is currently not a polygon, but the scan locations
 		/// where the symbol was decoded</remarks>
-		[DllImport("libzbar-0")]
+		[DllImport("libzbar-0", CallingConvention = CallingConvention.Cdecl)]
 		private static extern uint zbar_symbol_get_loc_size(IntPtr symbol);
 		
 		/// <summary>
@@ -222,7 +224,7 @@ namespace ZBar
 		/// </summary>
 		/// <returns> the x-coordinate for a point in the location polygon.
 		/// -1 if index is out of range</returns>
-		[DllImport("libzbar-0")]
+		[DllImport("libzbar-0", CallingConvention = CallingConvention.Cdecl)]
 		private static extern int zbar_symbol_get_loc_x(IntPtr symbol, uint index);
 		
 		/// <summary>
@@ -231,7 +233,7 @@ namespace ZBar
 		/// </summary>
 		/// <returns> the y-coordinate for a point in the location polygon.
 		///  -1 if index is out of range</returns>
-		[DllImport("libzbar-0")]
+		[DllImport("libzbar-0", CallingConvention = CallingConvention.Cdecl)]
 		private static extern int zbar_symbol_get_loc_y(IntPtr symbol, uint index);
 		
 		/// <summary>
@@ -240,7 +242,7 @@ namespace ZBar
 		/// <returns> the next result symbol, or
 		/// NULL when no more results are available</returns>
 		/// <remarks>Marked internal because it is used by the symbol iterators.</remarks>
-		[DllImport("libzbar-0")]
+		[DllImport("libzbar-0", CallingConvention = CallingConvention.Cdecl)]
 		internal static extern IntPtr zbar_symbol_next(IntPtr symbol);
 		
 		/// <summary>
@@ -252,7 +254,7 @@ namespace ZBar
 		/// with a larger size if necessary.</param>
 		/// <param name="buflen">  is inout length of the result buffer.</param>
 		/// <returns> the buffer pointer</returns>
-		[DllImport("libzbar-0")]
+		[DllImport("libzbar-0", CallingConvention = CallingConvention.Cdecl)]
 		private static extern IntPtr zbar_symbol_xml(IntPtr symbol, out IntPtr buffer, out uint buflen);
 		#endregion
 	}
